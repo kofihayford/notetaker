@@ -12,9 +12,8 @@ app.get("/", (req, res) => {
     res.sendFile("index.html")
 })
 app.get("/notes", (req, res) => {
-    res.sendFile("notes.html")
+    res.sendFile("public/notes.html", { root: __dirname })
 })
-
 
 //Get the app to listen to the appropriate host. 
 app.listen(7000, () => {
