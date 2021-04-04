@@ -14,7 +14,11 @@ console.log(JSON.stringify(jsonData, null, 2));
 app.use("/", express.static(path.join(__dirname, "public")))
 console.log(__dirname);
 
+//retrieve JSON data
 app.use(express.json());
+
+//Makes sure that URL encoder data is inputted to the right place/ 
+app.use(express.urlencoded({ extended: true }));
 
 //retrieve the informaiton/file and send it or show it. There are the GET requests to read the dbjson and return all saved notes.
 app.get("/", (req, res) => {
@@ -30,8 +34,9 @@ app.get("/api/notes", (req, res) => {
 
 //make a POST equest to the dbjson to change the file with these elements. 
 app.post("/api/notes", (req, res) => {
-    res.json(jsonData)
     console.log(req.body);
+
+    fs.writeFile(db.json)
 })
 
 
@@ -40,6 +45,3 @@ app.listen(7000, () => {
     //use console log to ensure that it is working. 
     console.log("listening to server")
 });
-
-
-// fs.writeFile()
