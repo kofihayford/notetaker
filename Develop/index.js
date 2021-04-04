@@ -32,13 +32,19 @@ app.get("/api/notes", (req, res) => {
     res.json(jsonData)
 })
 
-//make a POST equest to the dbjson to change the file with these elements. 
+//make a POST request to the dbjson to change the file with these elements. 
 app.post("/api/notes", (req, res) => {
     console.log(req.body);
-
-    fs.writeFile(db.json)
+    let obj = []
+    obj.push({ title: req.body.title, text: req.body.text })
+    let noteData = JSON.stringify(obj)
+    fs.writeFile(jsonData, noteData, (err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
+    res.json(noteData)
 })
-
 
 //Get the app to listen to the appropriate host. 
 app.listen(7000, () => {
