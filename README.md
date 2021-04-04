@@ -1,2 +1,0 @@
-# notetaker
-Note Taker App
