@@ -38,10 +38,10 @@ app.post("/api/notes", (req, res) => {
     let obj = []
     obj.push({ title: req.body.title, text: req.body.text })
     let noteData = JSON.stringify(obj)
-    fs.writeFile(jsonData, noteData, (err) => {
+    fs.readFile("./db/db.json", (err, data) => {
         if (err) {
             console.log(err)
-        }
+        } fs.write("db.json", noteData)
     })
     res.json(noteData)
 })
