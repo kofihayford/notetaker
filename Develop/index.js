@@ -1,7 +1,9 @@
 //declare the appropriate and needed variables. 
 const express = require("express")
 const path = require("path")
+const fs = require("fs")
 const app = express()
+
 
 //define the path that should be used to get access to the required files. In this case, the important files are in the public folder. 
 app.use("/", express.static(path.join(__dirname, "public")))
@@ -20,8 +22,4 @@ app.listen(7000, () => {
     //use console log to ensure that it is working. 
     console.log("listening to server")
 });
-
-
-
-
 
