@@ -47,7 +47,7 @@ app.post("/api/notes", (req, res) => {
 })
 
 //Get the app to listen to the appropriate host. 
-app.listen(7000, () => {
+app.listen(process.env.PORT || 3000, () => {
     //use console log to ensure that it is working. 
     console.log("listening to server")
 });
