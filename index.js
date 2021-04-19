@@ -20,10 +20,6 @@ app.use(express.json());
 //Makes sure that URL encoder data is inputted to the right place/ 
 app.use(express.urlencoded({ extended: true }));
 
-//retrieve the informaiton/file and send it or show it. There are the GET requests to read the dbjson and return all saved notes.
-app.get("/", (req, res) => {
-    res.sendFile("index.html")
-})
 app.get("/notes", (req, res) => {
     res.sendFile("public/notes.html", { root: __dirname })
 })
@@ -34,16 +30,21 @@ app.get("/api/notes", (req, res) => {
 
 //make a POST request to the dbjson to change the file with these elements. 
 app.post("/api/notes", (req, res) => {
+    console.log(jsonData, "this is THE REEAL STUFF")
     console.log(req.body);
-    let obj = []
-    obj.push({ title: req.body.title, text: req.body.text })
-    let noteData = JSON.stringify(obj)
-    fs.readFile("./db/db.json", (err, data) => {
+    // let obj = []
+    jsonData.push({ title: req.body.title, text: req.body.text })
+    let noteData = JSON.stringify(jsonData)
+    fs.writeFile("./db/db.json", noteData, (err, data) => {
         if (err) {
             console.log(err)
-        } fs.write("db.json", noteData)
+        } res.json(noteData)
     })
-    res.json(noteData)
+})
+
+//retrieve the informaiton/file and send it or show it. There are the GET requests to read the dbjson and return all saved notes.
+app.get("/", (req, res) => {
+    res.sendFile("index.html")
 })
 
 //Get the app to listen to the appropriate host. 
@@ -51,3 +52,4 @@ app.listen(process.env.PORT || 3000, () => {
     //use console log to ensure that it is working. 
     console.log("listening to server")
 });
+
